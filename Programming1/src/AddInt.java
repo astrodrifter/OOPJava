@@ -21,6 +21,7 @@ public class AddInt {
 		
 		sum = firstNum+secondNum;
 		System.out.println("The sum is: " + sum);
+		
 	}
 
 }
