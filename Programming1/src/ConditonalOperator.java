@@ -1,5 +1,5 @@
 /*This program is a conditional operator example
- * 
+ * condition ? yesExpression : noExpression;
  * Dhruva O'Shea 13/09/17
  */
 
