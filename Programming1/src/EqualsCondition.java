@@ -12,7 +12,6 @@ public class EqualsCondition extends ConditonalOperator {
 		} else {
 			System.out.println("You are not my daughter, "+myString);
 		}
-
 	}
 
 }
