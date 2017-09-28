@@ -20,6 +20,14 @@ public class starLoop {
 			
 			count++;
 		}
+		System.out.print("\n");
+		int sum = 0, num = 5;
+		while(sum < 1000) {
+			num = num*2;
+			sum +=num;
+			System.out.print(num+" ");
+			
+		}
 
 	}
 
