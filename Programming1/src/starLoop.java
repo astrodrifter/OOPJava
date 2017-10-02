@@ -1,9 +1,8 @@
 import java.io.*;
 public class starLoop {
 
-	public static void main(String[] args) throws IOException {
-		//open buffer reader
-		BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) throws IOException{
+		
 		
 		int count = 1;
 		for(int i = 0; i < 7; i++) {
@@ -29,20 +28,7 @@ public class starLoop {
 			System.out.print(num+" ");
 			
 		}
-		/* Write a do loop which will continue to read 
-		 * positive integers and sum them until two consecutive 
-		 * integers entered are identical. The second identical 
-		 * integer should not be included in the sum. 
-		 * For example, if the user input 10 20 10 30 30 then the 
-		 * final value of sum should be 70 (10 + 20 + 10 + 30).
-		 */
 		
-		int num1, num2;
-		do {
-			System.out.println("Enter an integer: ");
-			num1 = keyboard,readLine();			
-		} while(num1 != num2);
-
 	}
 
 }

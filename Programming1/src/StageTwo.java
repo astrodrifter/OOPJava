@@ -4,7 +4,7 @@
  * 
  */
 import java.io.*;
-public class StageOne {
+public class StageTwo {
 
 	public static void main(String[] args) throws IOException{
 		
@@ -13,26 +13,28 @@ public class StageOne {
 		
 		// get customer details
 		String title, name, email, mobile, address;
-		System.out.println("Enter Customer Title:");
+		System.out.print("Enter Customer Title: ");
 		title = keyboard.readLine();
-		System.out.println("Enter Customer Name:");
+		System.out.print("Enter Customer Name: ");
 		name = keyboard.readLine();
-		System.out.println("Enter Customer Email Address:");
+		System.out.print("Enter Customer Email Address: ");
 		email = keyboard.readLine();
-		System.out.println("Enter Customer Mobile Phone No:");
+		System.out.print("Enter Customer Mobile Phone No: ");
 		mobile = keyboard.readLine();
-		System.out.println("Enter Home Address:");
+		System.out.print("Enter Home Address: ");
 		address = keyboard.readLine();
+		System.out.println();
 		
 		// get vehicle details
 		String state, licPlateNo, makeModel; 
 		
-		System.out.println("Enter Registration State:");
+		System.out.print("Enter Registration State: ");
 		state = keyboard.readLine();
-		System.out.println("Enter Licence Plate Number:");
+		System.out.print("Enter Licence Plate Number: ");
 		licPlateNo = keyboard.readLine();
-		System.out.println("Enter Make / Model Of Vehicle:");
+		System.out.print("Enter Make / Model Of Vehicle:");
 		makeModel = keyboard.readLine();
+		System.out.println();
 		
 		// get credit card details
 		String creditNo, expiryDate, ccvString;
@@ -41,22 +43,28 @@ public class StageOne {
 		creditNo = keyboard.readLine();
 		System.out.println("Enter Expiry Date:");
 		expiryDate = keyboard.readLine();
-		System.out.println("Enter ccv:");
+		System.out.println("Enter Security Code:");
 		ccvString = keyboard.readLine();
 		ccv = Integer.parseInt(ccvString);
-		
+		System.out.println();
 		
 		/* Get The number of sectors the vehicle has traveled */
 		/* The toll period for the trip (eg. peak, off-peak, evening) 
 		   for heavy commercial vehicles */
 		/* breakdown? */
 		
+		// Get sectors Traveled
 		String sectorsString;
 		int sectors;
 		double fee;
-		System.out.println("How many toll sectors did you pass?");
+		System.out.print("Enter Sectors Travelled: ");
 		sectorsString = keyboard.readLine();
 		sectors = Integer.parseInt(sectorsString);
+		System.out.println();
+		
+		// get vehicle type
+		System.out.print("Enter Vehicle Type:");
+		
 		fee = sectors*2.50;
 		
 		//	print details
