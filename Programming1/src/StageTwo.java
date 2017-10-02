@@ -61,43 +61,22 @@ public class StageTwo {
 		System.out.println();
 		
 		// get vehicle type
-		String vehicleType;
+		String vehicleType, tripTime = null;
 		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): ");
 		vehicleType = keyboard.readLine();
 		// if HCV we need trip time.
-		/*if(vehicleType == "HCV") {
-			String tripTime;
+		if(vehicleType == "HCV") {
 			System.out.print("Enter Trip Time (Peak, Off-Peak or Night): ");
 			tripTime = keyboard.readLine();
-		}*/
+		}
 		
 		/* calculate fee by  checking which vehicle type was entered and 
 		 * match it to vehicle type rate. If vehicle type is "HCV" extra 
 		 * step is initiated to get period and rate is changed accordingly 
 		 */
+		
 		double fee, rate;
-		String tripTime = null;
-		if(vehicleType == "M") {
-			rate = 1.40;
-			System.out.println("\nentered M rate\n ");
-		} else if(vehicleType == "C") {
-			rate = 2.40;
-			System.out.println("\nentered C rate\n ");
-		} else if(vehicleType == "LCV") {
-			rate = 3.80;
-			System.out.println("\nentered LCV rate\n ");
-		} else if(vehicleType == "HCV") {
-			rate = 7.20;
-			System.out.print("Enter Trip Time (Peak, Off-Peak or Night): ");
-			tripTime = keyboard.readLine();
-			if(tripTime == "Peak") {
-				rate = rate*1.4;
-			} else if(tripTime == "Night") {
-				rate = rate*0.7;
-			}
-		} else {
-			System.out.println("\n\nThere was a problem entering vehicle type:\n");
-		}
+		rate = getRate(vehicleType, tripTime);
 		fee = sectors*rate;
 		
 		/*	Print Invoice Details to Console */
@@ -127,7 +106,34 @@ public class StageTwo {
 			System.out.printf("Adjusted Sector Rate: \t\t$%d.2f",rate);
 		}
 		// Toll Fee
-		System.out.printf("Toll Invoice Total:     \t\t$%.2f\n",fee);
+		System.out.printf("\nToll Invoice Total:     \t\t$%.2f\n",fee);
+	}
+	public static double getRate(String vehicleType, String tripTime){
+		System.out.println("entered function");
+		double rate;
+		if(vehicleType == "HCV") {
+			rate = 7.20;
+			if(tripTime == "Peak") {
+				rate = rate*1.4;
+			} else if(tripTime == "Night") {
+				rate = rate*0.7;
+			} else {
+				rate = rate*1;
+			}
+		} else if(vehicleType == "M") {
+			rate = 1.40;
+			System.out.println("\nentered M rate\n ");
+		} else if(vehicleType == "C") {
+			rate = 2.40;
+			System.out.println("\nentered C rate\n ");
+		} else if(vehicleType == "LCV") {
+			rate = 3.80;
+			System.out.println("\nentered LCV rate\n ");
+		} else {
+			rate = 0.0;
+			System.out.println("\n\nThere was a problem entering vehicle type:\n");
+		}
+		return rate;
 	}
 
 }
