@@ -31,18 +31,18 @@ public class StageTwo {
 		state = keyboard.readLine();
 		System.out.print("Enter Licence Plate Number: ");
 		licPlateNo = keyboard.readLine();
-		System.out.print("Enter Make / Model Of Vehicle:");
+		System.out.print("Enter Make / Model Of Vehicle: ");
 		makeModel = keyboard.readLine();
 		System.out.println();
 		
 		// get credit card details
 		String creditNo, expiryDate, ccvString;
 		int ccv;
-		System.out.print("Enter Credit Card No:");
+		System.out.print("Enter Credit Card No: ");
 		creditNo = keyboard.readLine();
-		System.out.print("Enter Expiry Date:");
+		System.out.print("Enter Expiry Date: ");
 		expiryDate = keyboard.readLine();
-		System.out.print("Enter Security Code:");
+		System.out.print("Enter Security Code: ");
 		ccvString = keyboard.readLine();
 		ccv = Integer.parseInt(ccvString);
 		System.out.println();
@@ -65,7 +65,7 @@ public class StageTwo {
 		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): ");
 		vehicleType = keyboard.readLine();
 		// if HCV we need trip time.
-		if(vehicleType == "HCV") {
+		if(vehicleType.equals("HCV")) {
 			System.out.print("Enter Trip Time (Peak, Off-Peak or Night): ");
 			tripTime = keyboard.readLine();
 		}
@@ -81,37 +81,39 @@ public class StageTwo {
 		
 		/*	Print Invoice Details to Console */
 		// Customer Details
+		name = title + " " + name;
 		System.out.println("\nCustomer Details:\n");
-		System.out.printf("Name: %50s %s\n",title,name);
-		System.out.printf("Email Address: %43s\n",email);
-		System.out.printf("Mobile Phone Number: %37s\n",mobile);
-		System.out.printf("Home Address: %44s\n",address);
+		//System.out.printf("Name: %41s %s\n",title,name);
+		System.out.printf("Name: %54sm\n",name);
+		System.out.printf("Email Address: %46s\n",email);
+		System.out.printf("Mobile Phone Number: %40s\n",mobile);
+		System.out.printf("Home Address: %47s\n",address);
 		// Vehicle Details
 		System.out.println("\nVehicle Details:\n");
-		System.out.printf("Registration State: %38s\n",state);
-		System.out.printf("Licence Plate Number: %36s\n",licPlateNo);
-		System.out.printf("Make / Model: %44s\n",makeModel);
-		System.out.printf("Vehicle Type: %44s\n",vehicleType);
+		System.out.printf("Registration State: %41s\n",state);
+		System.out.printf("Licence Plate Number: %39s\n",licPlateNo);
+		System.out.printf("Make / Model: %47s\n",makeModel);
+		System.out.printf("Vehicle Type: %47s\n",vehicleType);
 		// Credit Card Details
 		System.out.printf("\nCard Details:\n\n");
-		System.out.printf("Credit Card No: %42s\n",creditNo);
-		System.out.printf("Expiry Date: %45s\n",expiryDate);
-		System.out.printf("Security Code: %43d\n",ccv);
+		System.out.printf("Credit Card No: %45s\n",creditNo);
+		System.out.printf("Expiry Date: %48s\n",expiryDate);
+		System.out.printf("Security Code: %46d\n",ccv);
 		// Trip Details
 		System.out.println("\nTrip Details:\n");
-		System.out.printf("Sectors travelled: %44s\n",sectors);
-		System.out.printf("Sector Rate: \t\t$%.2f",rate);
-		if(vehicleType == "HCV") {
-			System.out.printf("Trip Time: %44s\n",tripTime);
-			System.out.printf("Adjusted Sector Rate: \t\t$%d.2f",rate);
+		System.out.printf("Sectors travelled: %42s\n",sectors);
+		System.out.printf("Sector Rate: \t\t\t\t\t\t$%.2f",rate);
+		if(vehicleType.equals("HCV")) {
+			System.out.printf("\nTrip Time: %50s\n",tripTime);
+			System.out.printf("Adjusted Sector Rate: \t\t\t\t\t$%.2f",rate);
 		}
 		// Toll Fee
-		System.out.printf("\nToll Invoice Total:     \t\t$%.2f\n",fee);
+		System.out.printf("\nToll Invoice Total:   \t\t\t\t$%.2f\n",fee);
 	}
 	public static double getRate(String vehicleType, String tripTime){
 		System.out.println("entered function");
 		double rate;
-		if(vehicleType == "HCV") {
+		if(vehicleType.equals("HCV")) {
 			rate = 7.20;
 			if(tripTime == "Peak") {
 				rate = rate*1.4;
@@ -120,19 +122,20 @@ public class StageTwo {
 			} else {
 				rate = rate*1;
 			}
-		} else if(vehicleType == "M") {
+		} else if(vehicleType.equals("M")) {
 			rate = 1.40;
 			System.out.println("\nentered M rate\n ");
-		} else if(vehicleType == "C") {
+		} else if(vehicleType.equals("C")) {
 			rate = 2.40;
 			System.out.println("\nentered C rate\n ");
-		} else if(vehicleType == "LCV") {
+		} else if(vehicleType.equals("LCV")) {
 			rate = 3.80;
 			System.out.println("\nentered LCV rate\n ");
 		} else {
 			rate = 0.0;
 			System.out.println("\n\nThere was a problem entering vehicle type:\n");
 		}
+		System.out.println(rate);
 		return rate;
 	}
 
