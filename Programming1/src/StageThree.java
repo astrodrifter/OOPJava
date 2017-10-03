@@ -1,10 +1,10 @@
-/* This program is stage two of a toll program
+/* This program is stage three of a toll program
  * 
  * Dhruva OShea 04/10/17
  * 
  */
 import java.io.*;
-public class StageTwo {
+public class StageThree {
 
 	public static void main(String[] args) throws IOException{
 		
@@ -47,11 +47,6 @@ public class StageTwo {
 		ccv = Integer.parseInt(ccvString);
 		System.out.println();
 		
-		/* Get The number of sectors the vehicle has traveled */
-		/* The toll period for the trip (eg. peak, off-peak, evening) 
-		   for heavy commercial vehicles */
-		/* breakdown? */
-		
 		// Get sectors Traveled
 		String sectorsString;
 		int sectors;
@@ -60,23 +55,50 @@ public class StageTwo {
 		sectors = Integer.parseInt(sectorsString);
 		System.out.println();
 		
-		// get vehicle type
+		// get vehicle type if HCV we need trip time.
 		String vehicleType, tripTime = null;
-		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): ");
+		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): "); 
 		vehicleType = keyboard.readLine();
+		
+		/* New code to make multiple list entries */
+		
 		// if HCV we need trip time.
 		if(vehicleType.equals("HCV")) {
 			System.out.print("Enter Trip Time (Peak, Off-Peak or Night): ");
 			tripTime = keyboard.readLine();
 		}
 		
-		/* calculate fee by  checking which vehicle type was entered and 
-		 * match it to vehicle type rate. If vehicle type is "HCV" extra 
-		 * step is initiated to get period and rate is changed accordingly 
+		/* A loop menu driven entry
+		 * 
+		 * 	Toll Road Data Entry Menu
+			--------------------------------------------
+			A - Record Trip
+			B - Record Breakdown Incident 
+			X - Exit
+			Enter your selection: A 
+			Enter trip date: 11/09/2017 
+			Enter entry point: 5
+			Enter exit point: 1
+		 *
+		 * Toll charge List needs to display 
+		 * Time (if HCV)
+		 * Date
+		 * sector (from to)
+		 * rate
+		 * toll charge: (in brackets)
+		 * Toll charge total: in brackets)
+		 * 
+		 * Breakdown charge list need to display 
+		 * date
+		 * sector
+		 * recovery cost: (in brackets)
+		 * Breakdown total charge: (in Brackets)
+		 * 
+		 * Toll Invoice Total: (finally)
 		 */
 		
 		double fee, rate;
-		rate = getRate(vehicleType, tripTime);
+		rate = getRate(vehicleType, tripTime); // takes vehicle type and trip time. returns rate
 		fee = sectors*rate;
 		
 		/*	Print Invoice Details to Console */
@@ -99,6 +121,9 @@ public class StageTwo {
 		System.out.printf("Credit Card No: %45s\n",creditNo);
 		System.out.printf("Expiry Date: %48s\n",expiryDate);
 		System.out.printf("Security Code: %46d\n",ccv);
+		
+		/* new list printing code here */
+		
 		// Trip Details
 		System.out.println("\nTrip Details:\n");
 		System.out.printf("Sectors travelled: %42s\n",sectors);
