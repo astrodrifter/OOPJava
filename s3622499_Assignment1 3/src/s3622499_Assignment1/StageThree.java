@@ -24,7 +24,7 @@
  * By Dhruva OShea 04/10/17  student # s3622499 OUA RMIT
  * 
  */
-
+package s3622499_Assignment1;
 import java.io.*;
 import java.util.Scanner;
 public class StageThree {
