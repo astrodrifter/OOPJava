@@ -4,12 +4,16 @@
  * 
  */
 import java.io.*;
+import java.util.Scanner;
 public class StageThree {
 
 	public static void main(String[] args) throws IOException{
 		
 		//open buffer reader
 		BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+		// open scanner
+		Scanner console = new Scanner(System.in);
+				
 		
 		// get customer details
 		String title, name, email, mobile, address;
@@ -47,26 +51,31 @@ public class StageThree {
 		ccv = Integer.parseInt(ccvString);
 		System.out.println();
 		
-		// Get sectors Traveled
-		String sectorsString;
-		int sectors;
-		System.out.print("Enter Sectors Travelled: ");
-		sectorsString = keyboard.readLine();
-		sectors = Integer.parseInt(sectorsString);
-		System.out.println();
-		
 		// get vehicle type if HCV we need trip time.
-		String vehicleType, tripTime = null;
+		String vehicleType;
 		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): "); 
 		vehicleType = keyboard.readLine();
 		
-		/* New code to make multiple list entries */
+		/* New code to make multiple list entries 
+		 * 
+		 * Algorithm
+		 * 
+		 * Prompt user with menu
+		 * 		if user entry is trip 
+		 * 				get details
+		 * 				if vehicle is was HCV 
+		 * 					get time
+		 * 				add to list
+		 * 
+		 * 		if user entry is breakdown
+		 * 				get details
+		 * 				add to list
+		 * 
+		 * Print
+		 * 
+		 * */
 		
-		// if HCV we need trip time.
-		if(vehicleType.equals("HCV")) {
-			System.out.print("Enter Trip Time (Peak, Off-Peak or Night): ");
-			tripTime = keyboard.readLine();
-		}
+		
 		
 		/* A loop menu driven entry
 		 * 
@@ -79,8 +88,63 @@ public class StageThree {
 			Enter trip date: 11/09/2017 
 			Enter entry point: 5
 			Enter exit point: 1
-		 *
-		 * Toll charge List needs to display 
+		 */
+		 
+		
+		Boolean Exit = true;
+		String  selection, selectionToUpper, date, tripTime = null; 
+		int entryPoint, exitPoint, sectors = 0, temp;
+		double fee = 0, rate = 0;
+		while(Exit){
+			// display menu
+			System.out.println("Toll Road Data Entry Menu\n--------------------------------------------\n");
+			System.out.println("A - Record Trip\nB - Record Breakdown Incident\nX - Exit\n");
+			System.out.print("Enter your selection: ");
+			System.out.println();
+			// get user selection
+			selection = keyboard.readLine();
+			selectionToUpper = selection.toUpperCase();
+			char selec = selectionToUpper.charAt(0);
+			switch (selec) {
+				case 'A':								// make new entry
+					
+					System.out.print("Enter trip date: ");
+					System.out.println();
+					// check if vehicle was HCV
+					if(vehicleType.equals("HCV")) {
+						System.out.print("Enter trip time (Peak, Off-Peak or Night): ");
+						tripTime = keyboard.readLine();
+					}
+					// Get entry and exit points
+					System.out.print("Enter entry point: ");
+					entryPoint = console.nextInt();
+					System.out.print("Enter exit point: ");
+					exitPoint = console.nextInt();
+					// calculate sectors
+					temp = exitPoint-entryPoint;
+					sectors = Math.abs(temp);
+					// get rate and calculate fee
+					rate = getRate(vehicleType, tripTime); // takes vehicle type and trip time. returns rate
+					fee = sectors*rate;
+					break;
+					
+				case 'B':								// breakdown entry
+					// breakdown code
+					break;
+					
+				case 'X':								// exit menu
+					Exit = false;
+					break;
+					
+				default:	
+					System.out.println("There has been a problem with your selection.");// fault message
+					break;
+				
+			}
+			
+		}
+		
+		 /* Toll charge List needs to display 
 		 * Time (if HCV)
 		 * Date
 		 * sector (from to)
@@ -88,7 +152,7 @@ public class StageThree {
 		 * toll charge: (in brackets)
 		 * Toll charge total: in brackets)
 		 * 
-		 * Breakdown charge list need to display 
+		 * Breakdown charge list needs to display 
 		 * date
 		 * sector
 		 * recovery cost: (in brackets)
@@ -97,9 +161,6 @@ public class StageThree {
 		 * Toll Invoice Total: (finally)
 		 */
 		
-		double fee, rate;
-		rate = getRate(vehicleType, tripTime); // takes vehicle type and trip time. returns rate
-		fee = sectors*rate;
 		
 		/*	Print Invoice Details to Console */
 		// Customer Details
