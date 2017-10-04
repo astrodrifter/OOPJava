@@ -14,7 +14,7 @@ public class StageThree {
 		// open scanner
 		Scanner console = new Scanner(System.in);
 				
-		
+		/*
 		// get customer details
 		String title, name, email, mobile, address;
 		System.out.print("Enter Customer Title: ");
@@ -50,11 +50,14 @@ public class StageThree {
 		ccvString = keyboard.readLine();
 		ccv = Integer.parseInt(ccvString);
 		System.out.println();
-		
+		*/
 		// get vehicle type if HCV we need trip time.
 		String vehicleType;
 		System.out.print("Enter Vehicle Type (M, C, LCV, HCV): "); 
 		vehicleType = keyboard.readLine();
+		
+		
+		
 		
 		/* New code to make multiple list entries 
 		 * 
@@ -92,12 +95,14 @@ public class StageThree {
 		 
 		
 		Boolean Exit = true;
-		String  selection, selectionToUpper, date, tripTime = null; 
-		int entryPoint, exitPoint, sectors = 0, temp;
+		String  selection, selectionToUpper, date = null, tripTime = "-"; 
+		String tripList = null;
+		int entryPoint = 0, exitPoint = 0, sectors = 0, temp;
 		double fee = 0, rate = 0;
 		while(Exit){
+			tripTime = "- ";
 			// display menu
-			System.out.println("Toll Road Data Entry Menu\n--------------------------------------------\n");
+			System.out.println("\nToll Road Data Entry Menu\n--------------------------------------------\n");
 			System.out.println("A - Record Trip\nB - Record Breakdown Incident\nX - Exit\n");
 			System.out.print("Enter your selection: ");
 			System.out.println();
@@ -106,14 +111,16 @@ public class StageThree {
 			selectionToUpper = selection.toUpperCase();
 			char selec = selectionToUpper.charAt(0);
 			switch (selec) {
+			
 				case 'A':								// make new entry
-					
 					System.out.print("Enter trip date: ");
+					date = keyboard.readLine();
 					System.out.println();
 					// check if vehicle was HCV
 					if(vehicleType.equals("HCV")) {
 						System.out.print("Enter trip time (Peak, Off-Peak or Night): ");
 						tripTime = keyboard.readLine();
+						tripTime = "- "+tripTime;
 					}
 					// Get entry and exit points
 					System.out.print("Enter entry point: ");
@@ -125,7 +132,7 @@ public class StageThree {
 					sectors = Math.abs(temp);
 					// get rate and calculate fee
 					rate = getRate(vehicleType, tripTime); // takes vehicle type and trip time. returns rate
-					fee = sectors*rate;
+					fee = Math.round((sectors*rate)*10.00/10.00);
 					break;
 					
 				case 'B':								// breakdown entry
@@ -139,8 +146,11 @@ public class StageThree {
 				default:	
 					System.out.println("There has been a problem with your selection.");// fault message
 					break;
-				
+					
 			}
+			// Trip list
+			tripList += (tripTime + " " + "Trip on " + date + " from sector " + entryPoint 
+					+ " to " + exitPoint + " at rate $" + rate + " (toll charge: $" + fee + ")\n");
 			
 		}
 		
@@ -164,6 +174,7 @@ public class StageThree {
 		
 		/*	Print Invoice Details to Console */
 		// Customer Details
+		/*
 		name = title + " " + name;
 		System.out.println("\nCustomer Details:\n");
 		//System.out.printf("Name: %41s %s\n",title,name);
@@ -182,9 +193,11 @@ public class StageThree {
 		System.out.printf("Credit Card No: %45s\n",creditNo);
 		System.out.printf("Expiry Date: %48s\n",expiryDate);
 		System.out.printf("Security Code: %46d\n",ccv);
+		*/
 		
 		/* new list printing code here */
 		
+		/*
 		// Trip Details
 		System.out.println("\nTrip Details:\n");
 		System.out.printf("Sectors travelled: %42s\n",sectors);
@@ -195,9 +208,13 @@ public class StageThree {
 		}
 		// Toll Fee
 		System.out.printf("\nToll Invoice Total:   \t\t\t\t$%.2f\n",fee);
+		*/
+		console.close();
+		System.out.println(tripList);
 	}
+	
+	/* getRate is a function that takes vehicleType and tripTime as inputs to calculate and returns rate */
 	public static double getRate(String vehicleType, String tripTime){
-		System.out.println("entered function");
 		double rate;
 		if(vehicleType.equals("HCV")) {
 			rate = 7.20;
@@ -221,7 +238,6 @@ public class StageThree {
 			rate = 0.0;
 			System.out.println("\n\nThere was a problem entering vehicle type:\n");
 		}
-		System.out.println(rate);
 		return rate;
 	}
 

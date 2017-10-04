@@ -3,7 +3,6 @@
  * Dhruva O'Shea 04/09/2017
  */
 
-import java.io.*;
 import java.util.Scanner;
 public class UsingScanner {
 
@@ -19,7 +18,7 @@ public class UsingScanner {
 		String str1 = console.nextLine();
 		System.out.print("You entered ");
 		System.out.println(str1);
-
+		console.close();
 	}
 
 }
