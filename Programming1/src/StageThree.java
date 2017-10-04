@@ -96,9 +96,10 @@ public class StageThree {
 		
 		Boolean Exit = true;
 		String  selection, selectionToUpper, date = null, tripTime = "-"; 
-		String tripList = null;
-		int entryPoint = 0, exitPoint = 0, sectors = 0, temp;
-		double fee = 0, rate = 0;
+		String breakdownDate = null;
+		String tripList = "- ", breakdownList = "- ";
+		int entryPoint = 0, exitPoint = 0, sectors = 0, temp, breakdownSector = 0;;
+		double fee = 0, rate = 0, recoveryCost = 0;
 		while(Exit){
 			tripTime = "- ";
 			// display menu
@@ -132,11 +133,18 @@ public class StageThree {
 					sectors = Math.abs(temp);
 					// get rate and calculate fee
 					rate = getRate(vehicleType, tripTime); // takes vehicle type and trip time. returns rate
-					fee = Math.round((sectors*rate)*10.00/10.00);
+					fee = Math.round((sectors*rate)*100.00/100.00);
 					break;
 					
 				case 'B':								// breakdown entry
 					// breakdown code
+					System.out.print("Enter breakdown incident date: ");
+					breakdownDate = keyboard.readLine();
+					System.out.print("Enter sector breakdown occured: ");
+					breakdownSector = console.nextInt();
+					System.out.print("Enter vehicle recovery cost: ");
+					recoveryCost = console.nextDouble();
+					recoveryCost = Math.round(recoveryCost*100.00/100.00);
 					break;
 					
 				case 'X':								// exit menu
@@ -151,6 +159,9 @@ public class StageThree {
 			// Trip list
 			tripList += (tripTime + " " + "Trip on " + date + " from sector " + entryPoint 
 					+ " to " + exitPoint + " at rate $" + rate + " (toll charge: $" + fee + ")\n");
+			
+			breakdownList += ("- Breakdown on " + breakdownDate + " in sector "+ breakdownSector 
+					+ " (recovery cost: $"+ recoveryCost +")\n");
 			
 		}
 		
@@ -210,7 +221,10 @@ public class StageThree {
 		System.out.printf("\nToll Invoice Total:   \t\t\t\t$%.2f\n",fee);
 		*/
 		console.close();
+		System.out.println("\nTrip List: \n");
 		System.out.println(tripList);
+		System.out.println("\nBreakdown List: \n");
+		System.out.println(breakdownList);
 	}
 	
 	/* getRate is a function that takes vehicleType and tripTime as inputs to calculate and returns rate */
