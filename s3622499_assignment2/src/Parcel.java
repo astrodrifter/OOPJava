@@ -143,10 +143,21 @@ public class Parcel
 		 and the location, after which the new tracking entry should be appended to the 
 		 tracking history on a new line. Once the tracking history has been updated the 
 		 method should return true, indicating that the tracking update was recorded successfully.*/
-		 boolean delivered  = false;
-		 return delivered;
+		 //boolean delivered  = false;
+		 return true;
 	 }
 	 public boolean completeDelivery(String datetime, String signee) {
+		 trackingHistory += "Delivery to " + deliveryAddress + " at " + 
+				 datetime + "signed for by " + recipientName;
 		 return true;
+	 }
+	 public void printDetails() {
+		 System.out.println("Parcel Number: "+ parcelNumber);
+		 System.out.println("Sender: "+ senderName);
+		 System.out.println("Return Address: " + returnAddress);
+		 System.out.println("Recipient: " + recipientName);
+		 System.out.println("Contact Number: " + contactNumber);
+		 System.out.println("Satchel Size: " + satchelSize);
+		 System.out.println("Tracking History: " + trackingHistory);
 	 }
 }
