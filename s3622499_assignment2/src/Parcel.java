@@ -15,6 +15,18 @@ public class Parcel
 	private boolean deliveryComplete;
 	private String trackingHistory;
 	
+	//Parcel class constructor
+		public Parcel(String parcNum, String sendName, String retAddress, 
+				String recName, String delivAddress, String contNum) {
+			
+					parcelNumber = parcNum;
+					senderName = sendName;
+					returnAddress = retAddress;
+					recipientName = recName;
+					deliveryAddress = delivAddress;
+					contactNumber = contNum;
+				}
+		
 	//Accessors
 	public String getParcelNumber()
 	   {
@@ -36,17 +48,30 @@ public class Parcel
 	   {
 		  trackingHistory = "";
 	      return  trackingHistory;
-	   }
+	   } 
 	 
 	 
+	 // calculate postage
+	 public int calculatePostageCost(String satchelSize) {
+		 int postageCost = 0, trackingFee = 5; 
+		 
+		 if(satchelSize.equals("Large")) {
+			 postageCost = 17;
+		 } else if (satchelSize.equals("Medium")) {
+			 postageCost = 13;
+		 } else if (satchelSize.equals("Small")) {
+			 postageCost = 10;
+		 } else {
+			 System.out.println("Error with post size");
+			 postageCost = 0;
+		 }
+		 postageCost += trackingFee;
+		 return postageCost;
+	 }
 	 
-	
-	//Parcel class constructor
-	public Parcel(String parcelNumber, String trackingID, String senderName, 
-			String returnAddress, String recipientName, String deliveryAddress,
-			String recipientAddress, String contactNumber) {
-		
-				
-			}
-   
+	 // select parcel size
+	 public int selectSatchel(int parcelLength, int parcelWidth) {
+		 int selection = 0;
+		 return selection;
+	 }
 }
