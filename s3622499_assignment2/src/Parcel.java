@@ -1,11 +1,12 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Parcel
 {
    // implement the different elements of this Parcel class as described in
    // Stage 1 of the specification
+	
 	// create a Scanner
-	private static Scanner sc = new Scanner(System.in);
+	// private static Scanner sc = new Scanner(System.in);
 	   
 	//Attributes
 	private String parcelNumber;
@@ -15,8 +16,8 @@ public class Parcel
 	private String deliveryAddress;
 	private String contactNumber;
 	private String satchelSize;
-	private boolean deliveryComplete;
-	private String trackingHistory;
+	//private boolean deliveryComplete;
+	private String trackingHistory = "";
 	
 	//Parcel class constructor
 	public Parcel(String parcNum, String sendName, String retAddress, 
@@ -77,9 +78,9 @@ public class Parcel
 		 int selection = 0, lenSize = 0, widSize = 0;
 		 int largeLen = 500, medLen = 400, smlLen = 300;
 		 int largeWid = 400, medWid = 300, smlWid = 200;
-		 String size;
+		 
 		 //if satchel size already set return "1"
-		 if(!satchelSize.equals(null)) {
+		 //if(satchelSize.equals(null)) {
 			 
 			 //check length against maximum lengths in table
 			 if(parcelLength > largeLen) {
@@ -95,9 +96,10 @@ public class Parcel
 			 } else if(parcelLength < 0) {
 				 System.out.println("Parcel has no postive length");
 				 lenSize = 0;
+				 return 0;
 			 }
 			 
-		 }
+		 //}
 		//check length against maximum lengths in table
 		 if(parcelWidth > largeWid) {
 			 System.out.println("Parcel length to large to send.");
@@ -112,6 +114,7 @@ public class Parcel
 		 } else if(parcelLength < 0) {
 			 System.out.println("Parcel has no postive length");
 			 widSize = 0;
+			 return 0;
 		 }
 		 
 		 // check length and width, largest will determine size
@@ -122,16 +125,16 @@ public class Parcel
 		 }
 		 
 		 if(selection == 1) {
-			 size = "Small";
+			 satchelSize = "Small";
 		 } else if(selection == 2) {
-			 size = "Medium";
+			 satchelSize = "Medium";
 		 } else if(selection == 3) {
-			 size ="Large";
+			 satchelSize ="Large";
 		 } else {
 			 System.out.println("Failed to detrmine parcel size.");
 			 return 0;
 		 }
-		 calculatePostageCost(size);
+		 calculatePostageCost(satchelSize);
 		 return selection;
 	 }
 	 public boolean updateTrackingHistory(String datetime, String location) {
@@ -148,7 +151,7 @@ public class Parcel
 	 }
 	 public boolean completeDelivery(String datetime, String signee) {
 		 trackingHistory += "Delivery to " + deliveryAddress + " at " + 
-				 datetime + "signed for by " + recipientName;
+				 datetime + " signed for by " + signee;
 		 return true;
 	 }
 	 public void printDetails() {
@@ -158,6 +161,6 @@ public class Parcel
 		 System.out.println("Recipient: " + recipientName);
 		 System.out.println("Contact Number: " + contactNumber);
 		 System.out.println("Satchel Size: " + satchelSize);
-		 System.out.println("Tracking History: " + trackingHistory);
+		 System.out.println("Tracking History:\n" + trackingHistory);
 	 }
 }

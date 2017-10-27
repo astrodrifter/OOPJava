@@ -84,11 +84,28 @@ public class ParcelPostSystem
 
    private static void addNewParcel()
    {
+	  String parcelID, senderName, senderAddress;
+	  String recieverName, recieverAddress, contactNumber;
       System.out.println("Add New Parcel Feature");
       System.out.println();
       
       // code for Stage 2 Requirement A) should go in here
-
+      System.out.println("Enter Parcel ID:");
+      parcelID = sc.nextLine();
+      System.out.println("Sender Name:");
+      senderName = sc.nextLine();
+      System.out.println("Sender Address:");
+      senderAddress = sc.nextLine();
+      System.out.println("Reciever Name:");
+      recieverName = sc.nextLine();
+      System.out.println("Reciever Address:");
+      recieverAddress = sc.nextLine();
+      System.out.println("Contact Number:");
+      contactNumber = sc.nextLine();
+      System.out.println("Then press enter key.");
+      parcels[parcelCount] = new Parcel(parcelID, senderName, senderAddress, 
+    		  recieverName, recieverAddress, contactNumber);
+      parcelCount++;
       
    }
 
@@ -98,7 +115,9 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement B) should go in here
-
+      for(int i = 0; i < parcelCount; i++) {
+    	  	parcels[i].printDetails();
+      }
    }
 
    private static void viewDeliveryDetails()
@@ -116,7 +135,12 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement D) should go in here
-
+      int length, width;
+      System.out.println("Eneter item length:");
+      length = sc.nextInt();
+      System.out.println("Eneter item width:");
+      width = sc.nextInt();
+      parcels[parcelCount-1].selectSatchel(length, width);
    }
 
    private static void updateTrackingHistory()
@@ -125,6 +149,22 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement E) should go in here
+      String parcelNum;
+      int position = 0;
+      System.out.println("Enter parcel ID");
+      parcelNum = sc.nextLine();
+      // find parcel in system
+      for(int i = 0; i < parcelCount; i++) {
+    	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
+    	  		position = i;
+    	  	}
+      }
+      String dateTime, location;
+      System.out.println("Enter date/time:");
+      dateTime = sc.nextLine();
+      System.out.println("Location of parcel:");
+      location = sc.nextLine();
+      parcels[position].updateTrackingHistory(dateTime,location);
    }
 
    private static void completeDelivery()
@@ -133,6 +173,22 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement F) should go in here
+      String parcelNum;
+      int position = 0;
+      System.out.println("Enter parcel ID");
+      parcelNum = sc.nextLine();
+      // find parcel in system
+      for(int i = 0; i < parcelCount; i++) {
+    	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
+    	  		position = i;
+    	  	}
+      }
+      String dateTime, signee;
+      System.out.println("Enter date/time:");
+      dateTime = sc.nextLine();
+      System.out.println("Name of signee:");
+      signee = sc.nextLine();
+      parcels[position].completeDelivery(dateTime,signee);
 
    }
 
