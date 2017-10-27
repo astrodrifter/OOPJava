@@ -47,11 +47,11 @@ public class Parcel
 	   {
 	      return  contactNumber;
 	   }
-	 public String getTrackingHistory()
+	 /*public String getTrackingHistory()
 	   {
 		  trackingHistory = "";
 	      return  trackingHistory;
-	   } 
+	   } */
 	 
 	 
 	 // calculate postage
@@ -77,6 +77,7 @@ public class Parcel
 		 int selection = 0, lenSize = 0, widSize = 0;
 		 int largeLen = 500, medLen = 400, smlLen = 300;
 		 int largeWid = 400, medWid = 300, smlWid = 200;
+		 String size;
 		 //if satchel size already set return "1"
 		 if(!satchelSize.equals(null)) {
 			 
@@ -84,6 +85,7 @@ public class Parcel
 			 if(parcelLength > largeLen) {
 				 System.out.println("Parcel length to large to send.");
 				 lenSize = 0;
+				 return 0;
 			 } else if(parcelLength < largeLen && parcelLength >= medLen) {
 				 lenSize = 3;
 			 } else if(parcelLength < medLen && parcelLength >= smlLen) {
@@ -100,6 +102,7 @@ public class Parcel
 		 if(parcelWidth > largeWid) {
 			 System.out.println("Parcel length to large to send.");
 			 widSize = 0;
+			 return 0;
 		 } else if(parcelWidth < largeWid && parcelWidth >= medWid) {
 			 widSize = 3;
 		 } else if(parcelWidth < medWid && parcelWidth >= smlWid) {
@@ -117,6 +120,33 @@ public class Parcel
 		 } else {
 			 selection = widSize;
 		 }
+		 
+		 if(selection == 1) {
+			 size = "Small";
+		 } else if(selection == 2) {
+			 size = "Medium";
+		 } else if(selection == 3) {
+			 size ="Large";
+		 } else {
+			 System.out.println("Failed to detrmine parcel size.");
+			 return 0;
+		 }
+		 calculatePostageCost(size);
 		 return selection;
+	 }
+	 public boolean updateTrackingHistory(String datetime, String location) {
+		 // add all tracking history entries to a string.
+		 trackingHistory += "Date: " + datetime + " Location: " + location + ".\n";
+		 /*If the satchel size has not been set for the Parcel, or if it has 
+		 already been delivered then the method should immediately return false.
+		 Otherwise the method should construct a new tracking entry noting the date/time 
+		 and the location, after which the new tracking entry should be appended to the 
+		 tracking history on a new line. Once the tracking history has been updated the 
+		 method should return true, indicating that the tracking update was recorded successfully.*/
+		 boolean delivered  = false;
+		 return delivered;
+	 }
+	 public boolean completeDelivery(String datetime, String signee) {
+		 return true;
 	 }
 }
