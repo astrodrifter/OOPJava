@@ -126,7 +126,22 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement C) should go in here
-
+      String parcelNum;
+      int position = 0;
+      System.out.println("Enter parcel ID");
+      parcelNum = sc.nextLine();
+      // find parcel in system
+      for(int i = 0; i < parcelCount; i++) {
+    	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
+    	  		position = i;
+    	  		System.out.println("Parcel Number "+ parcelNum + " Will be delivered to "+ 
+    	  		      parcels[i].getRecipientName()+ " at "+parcels[i].getDeliveryAddress());
+    	  	} else {
+    	  		System.out.println("Parcel cannot be found by that Parcel Number!");
+    	  	}
+      }
+      
+   
    }
 
    private static void selectSatchel()
