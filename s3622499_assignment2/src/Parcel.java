@@ -14,5 +14,39 @@ public class Parcel
 	private String satchelSize;
 	private boolean deliveryComplete;
 	private String trackingHistory;
+	
+	//Accessors
+	public String getParcelNumber()
+	   {
+	      return  parcelNumber;
+	   }
+	 public String getRecipientName()
+	   {
+	      return  recipientName;
+	   }
+	 public String getDeliveryAddress()
+	   {
+	      return  deliveryAddress;
+	   }
+	 public String getContactNumber()
+	   {
+	      return  contactNumber;
+	   }
+	 public String getTrackingHistory()
+	   {
+		  trackingHistory = "";
+	      return  trackingHistory;
+	   }
+	 
+	 
+	 
+	
+	//Parcel class constructor
+	public Parcel(String parcelNumber, String trackingID, String senderName, 
+			String returnAddress, String recipientName, String deliveryAddress,
+			String recipientAddress, String contactNumber) {
+		
+				
+			}
    
 }
