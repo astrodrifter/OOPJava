@@ -161,13 +161,13 @@ public class ParcelPostSystem
       int position = 0;
       
       // find parcel in system
-      //boolean found = false;
+      boolean found = false;
     	  System.out.println("Enter parcel ID");
     	  parcelNum = sc.nextLine();
     	  for(int i = 0; i < parcelCount; i++) {
         	if(parcels[i].getParcelNumber().equals(parcelNum)) {
         		position = i;
-        		//found = true;
+        		found = true;
         		// get length and width
         		int length, width, result;
       	    System.out.println("Eneter item length:");
@@ -185,11 +185,14 @@ public class ParcelPostSystem
       	    		// if all good print cost
       	    		System.out.println("Postage cost = $" + result); 
       	    }
-        	} else {
-    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  		return;
-    	  	}
+        	}
     	  }
+    	// if parcel was not found 
+    	  if(!found) {
+    		  System.out.println("Parcel cannot be found by that Parcel Number!\n");
+  	  		return;
+    	  }
+    	  
    }
 
    private static void updateTrackingHistory()
@@ -202,24 +205,35 @@ public class ParcelPostSystem
       // find parcel
       String parcelNum;
       int position = 0;
+      boolean found = false;
       System.out.println("Enter parcel ID");
       parcelNum = sc.nextLine();
       // find parcel in system
       for(int i = 0; i < parcelCount; i++) {
     	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
     	  		position = i;
-    	  	} else {
-    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  		return;
-    	  	}
+    	  		found = true;
+    	  	} 
       }
+   // if parcel was not found 
+      if(!found) {
+		  System.out.println("Parcel cannot be found by that Parcel Number!\n");
+	  		return;
+	  }
       // add tracking details
       String dateTime, location;
+      boolean status;
       System.out.println("Enter date/time:");
       dateTime = sc.nextLine();
       System.out.println("Location of parcel:");
       location = sc.nextLine();
-      parcels[position].updateTrackingHistory(dateTime,location);
+      status = parcels[position].updateTrackingHistory(dateTime,location);
+      
+      if(status) {
+    	  	System.out.println("Parcel number "+parcelNum+"Tracking History updated.\n");
+      } else {
+    	  	System.out.println("Parcel number "+parcelNum+"Cannot update the tracking history for this parcel.\n");
+      }
    }
 
    private static void completeDelivery()
@@ -232,24 +246,35 @@ public class ParcelPostSystem
       // find parcel
       String parcelNum;
       int position = 0;
+      boolean found = false;
       System.out.println("Enter parcel ID");
       parcelNum = sc.nextLine();
       // find parcel in system
       for(int i = 0; i < parcelCount; i++) {
     	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
     	  		position = i;
-    	  	} else {
-    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  		return;
+    	  		found = true;
     	  	}
       }
+      // if parcel was not found 
+      if(!found) {
+		  System.out.println("Parcel cannot be found by that Parcel Number!\n");
+	  		return;
+	  }
       // add delivery details
       String dateTime, signee;
+      boolean status;
       System.out.println("Enter date/time:");
       dateTime = sc.nextLine();
       System.out.println("Name of signee:");
       signee = sc.nextLine();
-      parcels[position].completeDelivery(dateTime,signee);
+      status = parcels[position].completeDelivery(dateTime,signee);
+      
+      if(status) {
+  	  	System.out.println("Parcel number "+parcelNum+", Delivery Complete.\n");
+    } else {
+  	  	System.out.println("Parcel number "+parcelNum+", delivery cannot be completed for this parcel.\n");
+    }
 
    }
 
