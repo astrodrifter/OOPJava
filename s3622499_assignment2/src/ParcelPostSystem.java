@@ -157,13 +157,25 @@ public class ParcelPostSystem
       
       // find parcel in system
       boolean found = false;
-      
     	  System.out.println("Enter parcel ID");
     	  parcelNum = sc.nextLine();
     	  for(int i = 0; i < parcelCount; i++) {
         	if(parcels[i].getParcelNumber().equals(parcelNum)) {
         		position = i;
         		found = true;
+        		int length, width, result;
+      	    System.out.println("Eneter item length:");
+      	    length = sc.nextInt();
+      	    System.out.println("Eneter item width:");
+      	    width = sc.nextInt();
+      	    result = parcels[position].selectSatchel(length, width);
+      	    if(result == -1) {
+      	    		System.out.println("A satchel size has already been selected for the parcel.\n");
+      	    } else if(result == 0) {
+      	    		System.out.println("The parcel dimensions are too large to deliver in a satchel.\n");
+      	    } else {
+      	    		System.out.println("Postage cost = $" + result); 
+      	    }
       	} 
     	  }
     	  if(!found) {
@@ -171,7 +183,7 @@ public class ParcelPostSystem
     	  	return;
     	  }		
       
-      //check if satchel size has already been set.
+      /*check if satchel size has already been set.
       String satSize = parcels[position].getSatchelSize();
 	  if(satSize == null) {
 		  int length, width;
@@ -182,7 +194,7 @@ public class ParcelPostSystem
 	      parcels[position].selectSatchel(length, width);
 	  } else {
 		  System.out.println("Satchel size has already been set to "+ satSize);
-	  }
+	  }*/
       
    }
 

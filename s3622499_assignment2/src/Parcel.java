@@ -79,50 +79,52 @@ public class Parcel
 	 
 	 // select parcel size
 	 public int selectSatchel(int parcelLength, int parcelWidth) {
-		 int selection = 0, lenSize = 0, widSize = 0;
+		 int selection = 0, lenSize = 0, widSize = 0; 
 		 int largeLen = 500, medLen = 400, smlLen = 300;
 		 int largeWid = 400, medWid = 300, smlWid = 200;
+		 int fee = 0; // returns to method call in ParcelPostSystem
+		 
+		//check if already satchel size is already set
+		 if(satchelSize != null) {
+			 selection = -1;
+			 return selection;
+		 }
 		 
 		 //if satchel size already set return "1"
 		 //if(satchelSize.equals(null)) {
 			 
-			 //check length against maximum lengths in table
-			 if(parcelLength > largeLen) {
-				 System.out.println("Parcel length to large to send.");
-				 lenSize = 0;
-				 return 0;
-			 } else if(parcelLength < largeLen && parcelLength >= medLen) {
-				 lenSize = 3;
-			 } else if(parcelLength < medLen && parcelLength >= smlLen) {
-				 lenSize = 2;
-			 } else if(parcelLength < smlLen && parcelLength >= 0) {
-				 lenSize = 1;
-			 } else if(parcelLength < 0) {
-				 System.out.println("Parcel has no postive length");
-				 lenSize = 0;
-				 return 0;
-			 }
+		 //check length against maximum lengths in table
+		if(parcelLength > largeLen) {
+			 selection = 0;
+		 } else if(parcelLength <= largeLen && parcelLength > medLen) {
+			 lenSize = 3;
+		 } else if(parcelLength <= medLen && parcelLength > smlLen) {
+			 lenSize = 2;
+		 } else if(parcelLength <= smlLen && parcelLength > 0) {
+			 lenSize = 1;
+		 } else if(parcelLength < 0) {
+			 System.out.println("Parcel length is in a different dimension.");
+			 selection = 0;
+		 }
 			 
 		 //}
 		//check length against maximum lengths in table
 		 if(parcelWidth > largeWid) {
-			 System.out.println("Parcel length to large to send.");
-			 widSize = 0;
-			 return 0;
-		 } else if(parcelWidth < largeWid && parcelWidth >= medWid) {
+			 selection = 0;
+		 } else if(parcelWidth <= largeWid && parcelWidth > medWid) {
 			 widSize = 3;
-		 } else if(parcelWidth < medWid && parcelWidth >= smlWid) {
+		 } else if(parcelWidth <= medWid && parcelWidth > smlWid) {
 			 widSize = 2;
-		 } else if(parcelWidth < smlWid && parcelWidth >= 0) {
+		 } else if(parcelWidth <= smlWid && parcelWidth > 0) {
 			 widSize = 1;
 		 } else if(parcelLength < 0) {
-			 System.out.println("Parcel has no postive length");
-			 widSize = 0;
-			 return 0;
+			 System.out.println("Parcel width is in a different dimension.");
+			 selection = 0;
+			 
 		 }
 		 
 		 // check length and width, largest will determine size
-		 if(lenSize > widSize) {
+		 if(lenSize > widSize && selection != 0) {
 			 selection = lenSize;
 		 } else {
 			 selection = widSize;
@@ -130,26 +132,37 @@ public class Parcel
 		 
 		 if(selection == 1) {
 			 satchelSize = "Small";
+			 fee = calculatePostageCost(satchelSize);
+			 System.out.println(fee);
+			 //state = -1;
 		 } else if(selection == 2) {
 			 satchelSize = "Medium";
+			 fee = calculatePostageCost(satchelSize);
+			 //state = -1;
 		 } else if(selection == 3) {
 			 satchelSize ="Large";
+			 fee = calculatePostageCost(satchelSize);
+			 //state = -1;
 		 } else {
-			 System.out.println("Failed to detrmine parcel size.");
-			 return 0;
+			 selection = 0; // parcel too large for satchel
 		 }
-		 calculatePostageCost(satchelSize);
-		 return selection;
+		 
+		 // if result = -1 satchel already set
+		 // if result = 0 parcel too large
+		 // else calculate fee and return fee 
+		 //if(state == -1) {
+		//	 return state;
+		 if (selection == 0 || selection == -1) {
+			 return selection;
+		 } else {
+			 return fee;
+		 }
+		 
 	 }
 	 public boolean updateTrackingHistory(String datetime, String location) {
 		 // add all tracking history entries to a string.
 		 trackingHistory += "Date: " + datetime + " Location: " + location + ".\n";
-		 /*If the satchel size has not been set for the Parcel, or if it has 
-		 already been delivered then the method should immediately return false.
-		 Otherwise the method should construct a new tracking entry noting the date/time 
-		 and the location, after which the new tracking entry should be appended to the 
-		 tracking history on a new line. Once the tracking history has been updated the 
-		 method should return true, indicating that the tracking update was recorded successfully.*/
+		
 		 //boolean delivered  = false;
 		 return true;
 	 }
