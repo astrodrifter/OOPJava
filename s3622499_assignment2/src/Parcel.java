@@ -48,6 +48,10 @@ public class Parcel
 	   {
 	      return  contactNumber;
 	   }
+	 public String getSatchelSize()
+	   {
+	      return  satchelSize;
+	   }
 	 /*public String getTrackingHistory()
 	   {
 		  trackingHistory = "";
@@ -151,16 +155,16 @@ public class Parcel
 	 }
 	 public boolean completeDelivery(String datetime, String signee) {
 		 trackingHistory += "Delivery to " + deliveryAddress + " at " + 
-				 datetime + " signed for by " + signee;
+				 datetime + " signed for by " + signee +"\n";
 		 return true;
 	 }
 	 public void printDetails() {
-		 System.out.println("Parcel Number: "+ parcelNumber);
-		 System.out.println("Sender: "+ senderName);
-		 System.out.println("Return Address: " + returnAddress);
-		 System.out.println("Recipient: " + recipientName);
-		 System.out.println("Contact Number: " + contactNumber);
-		 System.out.println("Satchel Size: " + satchelSize);
+		 System.out.println("Parcel Number:  "+ parcelNumber);
+		 System.out.println("Sender:         "+ senderName);
+		 System.out.println("Return Address: "+ returnAddress);
+		 System.out.println("Recipient:      "+ recipientName);
+		 System.out.println("Contact Number: "+ contactNumber);
+		 System.out.println("Satchel Size:   "+ satchelSize);
 		 System.out.println("Tracking History:\n" + trackingHistory);
 	 }
 }

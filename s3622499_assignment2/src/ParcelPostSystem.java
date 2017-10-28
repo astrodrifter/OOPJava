@@ -168,17 +168,21 @@ public class ParcelPostSystem
         }
     	  	if(!found) {
     	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  	}
-  	  	
-  	  		
+    	  	}		
       }
+      //check if satchel size has already been set.
+      String satSize = parcels[position].getSatchelSize();
+	  if(satSize == null) {
+		  int length, width;
+	      System.out.println("Eneter item length:");
+	      length = sc.nextInt();
+	      System.out.println("Eneter item width:");
+	      width = sc.nextInt();
+	      parcels[position].selectSatchel(length, width);
+	  } else {
+		  System.out.println("Satchel size has already been set to "+ satSize);
+	  }
       
-      int length, width;
-      System.out.println("Eneter item length:");
-      length = sc.nextInt();
-      System.out.println("Eneter item width:");
-      width = sc.nextInt();
-      parcels[position].selectSatchel(length, width);
    }
 
    private static void updateTrackingHistory()
