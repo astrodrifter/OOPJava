@@ -150,12 +150,35 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement D) should go in here
+      
+      // CHECK IF ALREADY ASSIGNED
+      String parcelNum;
+      int position = 0;
+      
+      // find parcel in system
+      boolean found = false;
+      while(!found) {
+    	  	System.out.println("Enter parcel ID");
+    	  	parcelNum = sc.nextLine();
+    	  	for(int i = 0; i < parcelCount; i++) {
+      	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
+      	  		position = i;
+      	  		found = true;
+      	  	} 
+        }
+    	  	if(!found) {
+    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
+    	  	}
+  	  	
+  	  		
+      }
+      
       int length, width;
       System.out.println("Eneter item length:");
       length = sc.nextInt();
       System.out.println("Eneter item width:");
       width = sc.nextInt();
-      parcels[parcelCount-1].selectSatchel(length, width);
+      parcels[position].selectSatchel(length, width);
    }
 
    private static void updateTrackingHistory()
