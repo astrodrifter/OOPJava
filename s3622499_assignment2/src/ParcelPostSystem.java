@@ -157,19 +157,20 @@ public class ParcelPostSystem
       
       // find parcel in system
       boolean found = false;
-      while(!found) {
-    	  	System.out.println("Enter parcel ID");
-    	  	parcelNum = sc.nextLine();
-    	  	for(int i = 0; i < parcelCount; i++) {
-      	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
-      	  		position = i;
-      	  		found = true;
-      	  	} 
-        }
-    	  	if(!found) {
-    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  	}		
-      }
+      
+    	  System.out.println("Enter parcel ID");
+    	  parcelNum = sc.nextLine();
+    	  for(int i = 0; i < parcelCount; i++) {
+        	if(parcels[i].getParcelNumber().equals(parcelNum)) {
+        		position = i;
+        		found = true;
+      	} 
+    	  }
+    	  if(!found) {
+    	  	System.out.println("Parcel cannot be found by that Parcel Number!\n");
+    	  	return;
+    	  }		
+      
       //check if satchel size has already been set.
       String satSize = parcels[position].getSatchelSize();
 	  if(satSize == null) {
