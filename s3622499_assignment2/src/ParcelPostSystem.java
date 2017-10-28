@@ -90,6 +90,8 @@ public class ParcelPostSystem
       System.out.println();
       
       // code for Stage 2 Requirement A) should go in here
+      
+      // get parcel details
       System.out.println("Enter Parcel ID:");
       parcelID = sc.nextLine();
       System.out.println("Sender Name:");
@@ -103,6 +105,8 @@ public class ParcelPostSystem
       System.out.println("Contact Number:");
       contactNumber = sc.nextLine();
       System.out.println("Then press enter key.");
+      
+      //store parcel details in parcel object array
       parcels[parcelCount] = new Parcel(parcelID, senderName, senderAddress, 
     		  recieverName, recieverAddress, contactNumber);
       parcelCount++;
@@ -115,6 +119,7 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement B) should go in here
+      // print all entries in parcel object array
       for(int i = 0; i < parcelCount; i++) {
     	  	parcels[i].printDetails();
       }
@@ -126,14 +131,14 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement C) should go in here
+      
+      // find and print parcel delivery details
       String parcelNum;
-      int position = 0;
       System.out.println("Enter parcel ID");
       parcelNum = sc.nextLine();
       // find parcel in system
       for(int i = 0; i < parcelCount; i++) {
     	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
-    	  		position = i;
     	  		System.out.println("Parcel Number "+ parcelNum + " Will be delivered to "+ 
     	  		      parcels[i].getRecipientName()+ " at "+parcels[i].getDeliveryAddress());
     	  	} else {
@@ -151,51 +156,40 @@ public class ParcelPostSystem
 
       // code for Stage 2 Requirement D) should go in here
       
-      // CHECK IF ALREADY ASSIGNED
+      // locate parcel, check if already assigned, check parcel dimension, assign satchel
       String parcelNum;
       int position = 0;
       
       // find parcel in system
-      boolean found = false;
+      //boolean found = false;
     	  System.out.println("Enter parcel ID");
     	  parcelNum = sc.nextLine();
     	  for(int i = 0; i < parcelCount; i++) {
         	if(parcels[i].getParcelNumber().equals(parcelNum)) {
         		position = i;
-        		found = true;
+        		//found = true;
+        		// get length and width
         		int length, width, result;
       	    System.out.println("Eneter item length:");
       	    length = sc.nextInt();
       	    System.out.println("Eneter item width:");
       	    width = sc.nextInt();
+      	    // send to selectSatchel with length and width
       	    result = parcels[position].selectSatchel(length, width);
+      	    // check result
       	    if(result == -1) {
       	    		System.out.println("A satchel size has already been selected for the parcel.\n");
       	    } else if(result == 0) {
       	    		System.out.println("The parcel dimensions are too large to deliver in a satchel.\n");
       	    } else {
+      	    		// if all good print cost
       	    		System.out.println("Postage cost = $" + result); 
       	    }
-      	} 
+        	} else {
+    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
+    	  		return;
+    	  	}
     	  }
-    	  if(!found) {
-    	  	System.out.println("Parcel cannot be found by that Parcel Number!\n");
-    	  	return;
-    	  }		
-      
-      /*check if satchel size has already been set.
-      String satSize = parcels[position].getSatchelSize();
-	  if(satSize == null) {
-		  int length, width;
-	      System.out.println("Eneter item length:");
-	      length = sc.nextInt();
-	      System.out.println("Eneter item width:");
-	      width = sc.nextInt();
-	      parcels[position].selectSatchel(length, width);
-	  } else {
-		  System.out.println("Satchel size has already been set to "+ satSize);
-	  }*/
-      
    }
 
    private static void updateTrackingHistory()
@@ -204,6 +198,8 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement E) should go in here
+      
+      // find parcel
       String parcelNum;
       int position = 0;
       System.out.println("Enter parcel ID");
@@ -212,8 +208,12 @@ public class ParcelPostSystem
       for(int i = 0; i < parcelCount; i++) {
     	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
     	  		position = i;
+    	  	} else {
+    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
+    	  		return;
     	  	}
       }
+      // add tracking details
       String dateTime, location;
       System.out.println("Enter date/time:");
       dateTime = sc.nextLine();
@@ -228,6 +228,8 @@ public class ParcelPostSystem
       System.out.println();
 
       // code for Stage 2 Requirement F) should go in here
+      
+      // find parcel
       String parcelNum;
       int position = 0;
       System.out.println("Enter parcel ID");
@@ -236,8 +238,12 @@ public class ParcelPostSystem
       for(int i = 0; i < parcelCount; i++) {
     	  	if(parcels[i].getParcelNumber().equals(parcelNum)) {
     	  		position = i;
+    	  	} else {
+    	  		System.out.println("Parcel cannot be found by that Parcel Number!\n");
+    	  		return;
     	  	}
       }
+      // add delivery details
       String dateTime, signee;
       System.out.println("Enter date/time:");
       dateTime = sc.nextLine();
