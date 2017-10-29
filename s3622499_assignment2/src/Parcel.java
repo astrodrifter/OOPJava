@@ -153,6 +153,7 @@ public class Parcel
 		 // add all tracking history entries to a string.
 		 trackingHistory += "Date: " + datetime + " Location: " + location + ".\n";
 		 return true;
+		 
 	 }
 	 // registers delivery as complete and adds details to tracking history string
 	 public boolean completeDelivery(String datetime, String signee) {

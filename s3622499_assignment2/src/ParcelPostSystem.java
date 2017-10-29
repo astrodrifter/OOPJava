@@ -170,9 +170,9 @@ public class ParcelPostSystem
         		found = true;
         		// get length and width
         		int length, width, result;
-      	    System.out.println("Eneter item length:");
+      	    System.out.println("Eneter item length in mm:");
       	    length = sc.nextInt();
-      	    System.out.println("Eneter item width:");
+      	    System.out.println("Eneter item width in mm:");
       	    width = sc.nextInt();
       	    // send to selectSatchel with length and width
       	    result = parcels[position].selectSatchel(length, width);
@@ -222,17 +222,17 @@ public class ParcelPostSystem
 	  }
       // add tracking details
       String dateTime, location;
-      boolean status;
+      boolean status = false;
       System.out.println("Enter date/time:");
       dateTime = sc.nextLine();
       System.out.println("Location of parcel:");
       location = sc.nextLine();
       status = parcels[position].updateTrackingHistory(dateTime,location);
-      
+      System.out.println(status);
       if(status) {
-    	  	System.out.println("Parcel number "+parcelNum+"Tracking History updated.\n");
+    	  	System.out.println("Parcel number "+parcelNum+" Tracking History updated.\n");
       } else {
-    	  	System.out.println("Parcel number "+parcelNum+"Cannot update the tracking history for this parcel.\n");
+    	  	System.out.println("Parcel number "+parcelNum+" tracking history for this parcel NOT UPDATED.\n");
       }
    }
 
@@ -271,7 +271,7 @@ public class ParcelPostSystem
       status = parcels[position].completeDelivery(dateTime,signee);
       
       if(status) {
-  	  	System.out.println("Parcel number "+parcelNum+", Delivery Complete.\n");
+  	  	System.out.println("Parcel number "+parcelNum+", delivery Complete.\n");
     } else {
   	  	System.out.println("Parcel number "+parcelNum+", delivery cannot be completed for this parcel.\n");
     }
