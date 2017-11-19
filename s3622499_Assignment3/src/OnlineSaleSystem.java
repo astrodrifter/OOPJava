@@ -152,6 +152,30 @@ public class OnlineSaleSystem
       System.out.println();
 
       // implement your code for Stage 2 Requirement A) here
+      String itemNumber, itemDescription, itemCondition, sellerID;
+	  
+      //sales[0] = new 
+      /*(item number, item description, item condition, and seller ID
+       * Enter new item number: ITM009
+      Enter description for item: Extra Large Wooden Dog Kennel
+      Enter condition for item: Used
+      Enter seller name: AmazingPetSupplies
+      New sale added for item "Extra Large Wooden Dog Kennel"!*/
+      //store item details in sales object array
+      // get item details
+      System.out.println("Enter new item number:");
+      itemNumber = sc.nextLine();
+      System.out.println("Enter description for item:");
+      itemDescription = sc.nextLine();
+      System.out.println("Enter condition for item:");
+      itemCondition = sc.nextLine();
+      System.out.println("Enter seller name:");
+      sellerID = sc.nextLine();
+      System.out.println("New sale added for item '"+ itemDescription+"'!");
+      
+      sales[saleCount] = new ItemSale(itemNumber, itemDescription, itemCondition, sellerID);
+      saleCount++;
+      
       
    }
 
