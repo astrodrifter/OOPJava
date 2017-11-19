@@ -203,6 +203,8 @@ public class OnlineSaleSystem
     	     System.out.println("Enter message: ");
     	     message = sc.nextLine();
     	     sales[index].addMessage(message);
+    	     System.out.println("Message posted successfully for item "+id);
+    	     System.out.println();
       } else {
     	     System.out.println("Error - item number " +id+ " not found!");
       }
