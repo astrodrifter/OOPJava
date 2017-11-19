@@ -171,9 +171,10 @@ public class OnlineSaleSystem
       itemCondition = sc.nextLine();
       System.out.println("Enter seller name:");
       sellerID = sc.nextLine();
-      System.out.println("New sale added for item '"+ itemDescription+"'!");
+     
       
       sales[saleCount] = new ItemSale(itemNumber, itemDescription, itemCondition, sellerID);
+      System.out.println("New sale added for item '"+ sales[saleCount].getItemDescription() + "'!");
       saleCount++;
       
       

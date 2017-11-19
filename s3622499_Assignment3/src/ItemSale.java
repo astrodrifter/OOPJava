@@ -50,6 +50,11 @@ public class ItemSale
       return itemNumber;
    }
    
+   public String getItemDescription()
+   {
+      return itemDescription;
+   }
+   
    public int getHighestBid()
    {
       return highestBid;
