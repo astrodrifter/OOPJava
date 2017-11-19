@@ -191,6 +191,22 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 2 Requirement C) here
+      String id;
+      int index;
+      System.out.println("Enter item number to post message for: ");
+      id = sc.nextLine();
+      System.out.println();
+      index = findItem(id);
+      System.out.println(index);
+      if(index >= 0) {
+    	     String message;
+    	     System.out.println("Enter message: ");
+    	     message = sc.nextLine();
+    	     sales[index].addMessage(message);
+      } else {
+    	     System.out.println("Error - item number " +id+ " not found!");
+      }
+      
    }
 
    // implementation of record bid feature
@@ -227,6 +243,20 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 4 Requirement B) here
+   }
+   
+   // find item helper method
+   public static int findItem(String itemNum) {
+      boolean found = false;
+	  int i = 0, index = -1;
+	  while(!found) {
+		  if(sales[i].getItemNumber().equals(itemNum)) {
+			  index = i;
+			  found = true;
+		  }
+		  i++;
+	  }
+	  return index;
    }
 
 }
