@@ -197,16 +197,15 @@ public class OnlineSaleSystem
       id = sc.nextLine();
       System.out.println();
       index = findItem(id);
-      System.out.println(index);
       if(index >= 0) {
     	     String message;
     	     System.out.println("Enter message: ");
     	     message = sc.nextLine();
     	     sales[index].addMessage(message);
-    	     System.out.println("Message posted successfully for item "+id);
+    	     System.out.println("\nMessage posted successfully for item "+id);
     	     System.out.println();
       } else {
-    	     System.out.println("Error - item number " +id+ " not found!");
+    	     System.out.println("\nError - item number " +id+ " not found!");
       }
       
    }
@@ -218,6 +217,28 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 2 Requirement D) here
+      String id;
+      int index;
+      System.out.println("Enter item number to bid for: ");
+      id = sc.nextLine();
+      System.out.println();
+      index = findItem(id);
+      if(index >= 0) {
+    	     int bid;
+    	     System.out.println("Enter bid: ");
+    	     bid = sc.nextInt();
+    	     if(bid > sales[index].getHighestBid()) {
+    	    	    sales[index].recordBid(bid,id);
+        	    System.out.println("\nBid of " +bid+ " posted successfully for item "+id);
+        	    System.out.println();
+    	     } else {
+    	    	    System.out.println("Bid too low!");
+    	     }
+    	     
+      } else {
+    	     System.out.println("\nError - item number " +id+ " not found!");
+      }
+      
    }
 
    // implementation of close sale feature
