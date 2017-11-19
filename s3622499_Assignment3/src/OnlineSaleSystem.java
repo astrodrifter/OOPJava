@@ -153,15 +153,6 @@ public class OnlineSaleSystem
 
       // implement your code for Stage 2 Requirement A) here
       String itemNumber, itemDescription, itemCondition, sellerID;
-	  
-      //sales[0] = new 
-      /*(item number, item description, item condition, and seller ID
-       * Enter new item number: ITM009
-      Enter description for item: Extra Large Wooden Dog Kennel
-      Enter condition for item: Used
-      Enter seller name: AmazingPetSupplies
-      New sale added for item "Extra Large Wooden Dog Kennel"!*/
-      //store item details in sales object array
       // get item details
       System.out.println("Enter new item number:");
       itemNumber = sc.nextLine();
@@ -172,7 +163,7 @@ public class OnlineSaleSystem
       System.out.println("Enter seller name:");
       sellerID = sc.nextLine();
      
-      
+      //store item details in sales object array
       sales[saleCount] = new ItemSale(itemNumber, itemDescription, itemCondition, sellerID);
       System.out.println("New sale added for item '"+ sales[saleCount].getItemDescription() + "'!");
       saleCount++;
@@ -185,9 +176,12 @@ public class OnlineSaleSystem
    {
       System.out.println("Display Sales Feature");
       System.out.println();
+      System.out.println("List of all sales in Online Sale System:\n");
       
       // implement your code for Stage 2 Requirement B) here
-
+      for(int i = 0; i < saleCount; i ++) {
+    	     sales[i].printDetails();
+      }
    }
 
    // implementation of post message feature
