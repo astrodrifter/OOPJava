@@ -219,24 +219,29 @@ public class OnlineSaleSystem
       // implement your code for Stage 2 Requirement D) here
       String id;
       int index;
-      System.out.println("Enter item number to bid for: ");
+      
+      System.out.print("Enter item number to bid for: ");
       id = sc.nextLine();
       System.out.println();
       index = findItem(id);
       if(index >= 0) {
     	     int bid;
-    	     System.out.println("Enter bid: ");
+    	     boolean status;
+    	     System.out.print("Current bid: "+sales[index].getHighestBid()+"\n");
+    	     System.out.print("Enter new bid: ");
     	     bid = sc.nextInt();
-    	     if(bid > sales[index].getHighestBid()) {
-    	    	    sales[index].recordBid(bid,id);
-        	    System.out.println("\nBid of " +bid+ " posted successfully for item "+id);
-        	    System.out.println();
+    	     System.out.println();
+    	     status = sales[index].recordBid(bid,id);
+    	     if(status) {
+    	    	    System.out.println("\nBid recorded successfully for item number "+id+".");
+         	System.out.println();
     	     } else {
-    	    	    System.out.println("Bid too low!");
+    	    	    System.out.println("\nError - bid could not be recorded for item number "+id+"!");
+    	        System.out.println();
     	     }
     	     
       } else {
-    	     System.out.println("\nError - item number " +id+ " not found!");
+    	     System.out.println("Error - item number " +id+ " not found!");
       }
       
    }
@@ -276,8 +281,14 @@ public class OnlineSaleSystem
 		  if(sales[i].getItemNumber().equals(itemNum)) {
 			  index = i;
 			  found = true;
+		  } else {
+			  index = -1;
 		  }
 		  i++;
+		  if(i == saleCount) {
+			index = -1;
+			return index;
+		  }
 	  }
 	  return index;
    }
