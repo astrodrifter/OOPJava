@@ -261,14 +261,15 @@ public class OnlineSaleSystem
       System.out.println();
       index = findItem(id);
       if(index >= 0) {
-    	     int bid = 0;
-    	     bid = sales[index].closeSale();
-    	     if(bid >= 0) {
+    	     int closed = 0;
+    	     closed = sales[index].closeSale();
+    	     if(closed >= 0) {
     	    	    System.out.println("\nSale closed - final sale price: $"+
-    	    	    		bid+" item number "+id);
+    	    	    		closed+" item number "+id);
         	    System.out.println();
     	     } else {
-    	    	    System.out.println("Error - sale was already closed for item number "+id+"!");
+    	    	    System.out.println("Error - sale was already closed for item number "+id
+    	    	    		+"! Final sale price $"+sales[index].getHighestBid()+".");
     	     }
     	     
       } else {
@@ -311,6 +312,27 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 4 Requirement B) here
+      String id;
+      int index;
+      boolean acceptNearestOfferStatus = false;
+      System.out.print("Enter item number to update accept nearest offer status: ");
+      id = sc.nextLine();
+      System.out.println();
+      index = findItem(id);
+      if(index >= 0 && BuyItNowSale.class.isInstance(sales[index])) {
+    	     acceptNearestOfferStatus = ((BuyItNowSale)sales[index]).acceptNearestOffer();
+    	     if(acceptNearestOfferStatus) {
+    	    	    System.out.println("Accepting nearest offer of $"+sales[index].getHighestBid());
+    	     } else {
+    	    	    System.out.println("Accpeting nearest offer for Item "+sales[index].getItemNumber()+
+    	    	    		" has already been updated.");
+    	     }
+      } else if(index >= 0 && !BuyItNowSale.class.isInstance(sales[index])){
+    	     System.out.println("\nError - item number " +id
+    	    		 + " cannot be set to accept the nearest offer!");
+      } else {
+    	     System.out.println("\nError - item number " +id+ " not found!");
+      }
    }
    
    // find item helper method
@@ -319,7 +341,6 @@ public class OnlineSaleSystem
 	  int i = 0, index = -1;
 	  while(!found) {
 		  if(sales[i].getItemNumber().equals(itemNum)) {
-			  System.out.println(i);
 			  index = i;
 			  found = true;
 		  } 
