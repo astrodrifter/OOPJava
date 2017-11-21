@@ -10,12 +10,12 @@ public class BuyItNowSale extends ItemSale{
 		this.acceptingNearestOffer = false;
 	}
 	@Override
-	public boolean recordBid(int bidPrice, String sellerID) {
-		boolean recorded = false;
+	public boolean recordBid(int bidPrice, String bidderID) { //in specs say sellerID
+		boolean recorded = false;                      // im assuming it's meamt to be bidderID
 		if(bidPrice > buyItNowPrice) {
 			bidPrice = buyItNowPrice;
 		} 
-		recorded = super.recordBid(bidPrice, sellerID);
+		recorded = super.recordBid(bidPrice, bidderID);
 		if (!recorded) {
 			return recorded; // bid was not recorded
 		} else if (bidPrice == buyItNowPrice){ //bid was recorded
@@ -48,5 +48,11 @@ public class BuyItNowSale extends ItemSale{
 			acceptingNearestOffer = false;
 		}
 		return acceptingNearestOffer;
+	}
+	@Override
+	public void printDetails() {
+		super.printDetails();
+		System.out.printf("%-30s %s%n", "Buy It Now Price:", buyItNowPrice);
+		System.out.printf("%-30s %s%n", "Accepting Nearest Offer:", acceptingNearestOffer);
 	}
 }

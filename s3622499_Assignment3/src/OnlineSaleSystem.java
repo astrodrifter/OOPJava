@@ -220,7 +220,6 @@ public class OnlineSaleSystem
       // implement your code for Stage 2 Requirement D) here
       String id;
       int index;
-      
       System.out.print("Enter item number to bid for: ");
       id = sc.nextLine();
       System.out.println();
@@ -228,11 +227,19 @@ public class OnlineSaleSystem
       if(index >= 0) {
     	     int bid;
     	     boolean status;
+    	     String bidderID = null;
     	     System.out.print("Current bid: $"+sales[index].getHighestBid()+"\n");
     	     System.out.print("Enter new bid: ");
     	     bid = sc.nextInt();
-    	     System.out.println();
-    	     status = sales[index].recordBid(bid,id);
+    	     System.out.print("Enter bidder ID: ");
+    	     bidderID = sc.nextLine(); // I don't know why but program skips through here
+    	    	 if (bidderID == null || bidderID.isEmpty()) { // therefore I have added this to get bidderID
+    	    		 System.out.print("\nPlease re-enter bidder ID: ");
+        	    	 bidderID = sc.nextLine();
+    	    		} else {
+    	    			System.out.println("Bidder ID not recorded");
+    	    		}
+    	    	 status = sales[index].recordBid(bid,bidderID);
     	     if(status) {
     	    	    System.out.println("\nBid recorded successfully for item number "+id+".");
          	System.out.println();
