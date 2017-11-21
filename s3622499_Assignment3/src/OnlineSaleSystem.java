@@ -31,6 +31,7 @@ public class OnlineSaleSystem
                                       "Used", "gamerkid_97");
       saleCount++;
       
+      
       /*
        * The code below will not run until you have completed Stage 3 Requirement B.
        */
@@ -227,7 +228,7 @@ public class OnlineSaleSystem
       if(index >= 0) {
     	     int bid;
     	     boolean status;
-    	     System.out.print("Current bid: "+sales[index].getHighestBid()+"\n");
+    	     System.out.print("Current bid: $"+sales[index].getHighestBid()+"\n");
     	     System.out.print("Enter new bid: ");
     	     bid = sc.nextInt();
     	     System.out.println();
@@ -253,6 +254,27 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 2 Requirement E) here
+      String id;
+      int index;
+      System.out.print("Enter item number to close sale: ");
+      id = sc.nextLine();
+      System.out.println();
+      index = findItem(id);
+      if(index >= 0) {
+    	     int bid = 0;
+    	     bid = sales[index].closeSale();
+    	     if(bid >= 0) {
+    	    	    System.out.println("\nSale closed - final sale price: $"+
+    	    	    		bid+" item number "+id);
+        	    System.out.println();
+    	     } else {
+    	    	    System.out.println("Error - sale was already closed for item number "+id+"!");
+    	     }
+    	     
+      } else {
+    	     System.out.println("\nError - item number " +id+ " not found!");
+      }
+      
    }
    
    // implementation of add new buy it now sale feature
@@ -262,6 +284,24 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 4 Requirement A) here
+      String itemNumber, itemDescription, itemCondition, sellerID;
+      int buyItNowPrice;
+      // get item details
+      System.out.println("Enter new item number:");
+      itemNumber = sc.nextLine();
+      System.out.println("Enter description for item:");
+      itemDescription = sc.nextLine();
+      System.out.println("Enter condition for item:");
+      itemCondition = sc.nextLine();
+      System.out.println("Enter seller name:");
+      sellerID = sc.nextLine();
+      System.out.println("Enter Buy It Now Price:");
+      buyItNowPrice = sc.nextInt();
+     
+      //store item details in sales object array
+      sales[saleCount] = new BuyItNowSale(itemNumber, itemDescription, itemCondition, sellerID, buyItNowPrice);
+      System.out.println("New sale added for item '"+ sales[saleCount].getItemDescription() + "'!");
+      saleCount++;
    }
    
    // implementation of update accept nearest offer status feature
@@ -279,13 +319,12 @@ public class OnlineSaleSystem
 	  int i = 0, index = -1;
 	  while(!found) {
 		  if(sales[i].getItemNumber().equals(itemNum)) {
+			  System.out.println(i);
 			  index = i;
 			  found = true;
-		  } else {
-			  index = -1;
-		  }
+		  } 
 		  i++;
-		  if(i == saleCount) {
+		  if(!found  && i == saleCount) {
 			index = -1;
 			return index;
 		  }
