@@ -30,13 +30,6 @@ public class OnlineSaleSystem
       sales[saleCount] = new ItemSale("ITM102", "Xbox One S 1TB w/ 5 games",
                                       "Used", "gamerkid_97");
       saleCount++;
-      
-      
-      /*
-       * The code below will not run until you have completed Stage 3 Requirement B.
-       */
-      
-      /* (remove this line when you are ready to test BuyItNowSale functionality)
      
        
       sales[saleCount] = new BuyItNowSale("BUY013",
@@ -48,8 +41,7 @@ public class OnlineSaleSystem
       sales[saleCount] = new BuyItNowSale("BUY013", "iPad Pro 10.5\" 256GB Wi-Fi",
                                           "New", "cheap_phone_store", 1100);
       saleCount++;
-      
-      (remove this line when you are ready to test BuyItNowSale functionality) */
+       
 
    }
 

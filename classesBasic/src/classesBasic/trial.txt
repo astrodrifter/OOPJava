@@ -1,0 +1,4 @@
+This is the exam file for Java.
+It is a closed book exam.
+Multiple choice questions
+In the exam are easy.

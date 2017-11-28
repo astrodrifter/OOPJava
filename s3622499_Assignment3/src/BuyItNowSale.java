@@ -9,9 +9,10 @@ public class BuyItNowSale extends ItemSale{
 		this.buyItNowPrice = buyItNowPrice;
 		this.acceptingNearestOffer = false;
 	}
+	// record bid
 	@Override
 	public boolean recordBid(int bidPrice, String bidderID) { //in specs say sellerID
-		boolean recorded = false;                      // im assuming it's meamt to be bidderID
+		boolean recorded = false;                      // im assuming it's meant to be bidderID
 		if(bidPrice > buyItNowPrice) {
 			bidPrice = buyItNowPrice;
 		} 
@@ -24,6 +25,7 @@ public class BuyItNowSale extends ItemSale{
 		}
 		return recorded;
 	}
+	// Close sale
 	@Override
 	public int closeSale() {
 		System.out.println("Entered subclass closeSale");
@@ -41,6 +43,7 @@ public class BuyItNowSale extends ItemSale{
 		}
 		return closed;
 	}
+	// accept nearest offer
 	public boolean acceptNearestOffer() {
 		if(acceptingNearestOffer == false) {
 			acceptingNearestOffer = true;
@@ -49,6 +52,7 @@ public class BuyItNowSale extends ItemSale{
 		}
 		return acceptingNearestOffer;
 	}
+	// prints details including buy it now details
 	@Override
 	public void printDetails() {
 		super.printDetails();
