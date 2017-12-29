@@ -30,12 +30,6 @@ public class OnlineSaleSystem
       sales[saleCount] = new ItemSale("ITM102", "Xbox One S 1TB w/ 5 games",
                                       "Used", "gamerkid_97");
       saleCount++;
-      
-      /*
-       * The code below will not run until you have completed Stage 3 Requirement B.
-       */
-      
-      /* (remove this line when you are ready to test BuyItNowSale functionality)
      
        
       sales[saleCount] = new BuyItNowSale("BUY013",
@@ -47,8 +41,7 @@ public class OnlineSaleSystem
       sales[saleCount] = new BuyItNowSale("BUY013", "iPad Pro 10.5\" 256GB Wi-Fi",
                                           "New", "cheap_phone_store", 1100);
       saleCount++;
-      
-      (remove this line when you are ready to test BuyItNowSale functionality) */
+       
 
    }
 
@@ -219,7 +212,6 @@ public class OnlineSaleSystem
       // implement your code for Stage 2 Requirement D) here
       String id;
       int index;
-      
       System.out.print("Enter item number to bid for: ");
       id = sc.nextLine();
       System.out.println();
@@ -227,11 +219,19 @@ public class OnlineSaleSystem
       if(index >= 0) {
     	     int bid;
     	     boolean status;
+    	     String bidderID = null;
     	     System.out.print("Current bid: $"+sales[index].getHighestBid()+"\n");
     	     System.out.print("Enter new bid: ");
     	     bid = sc.nextInt();
-    	     System.out.println();
-    	     status = sales[index].recordBid(bid,id);
+    	     System.out.print("Enter bidder ID: ");
+    	     bidderID = sc.nextLine(); // I don't know why but program skips through here
+    	    	 if (bidderID == null || bidderID.isEmpty()) { // therefore I have added this to get bidderID
+    	    		 System.out.print("\nPlease re-enter bidder ID: ");
+        	    	 bidderID = sc.nextLine();
+    	    		} else {
+    	    			System.out.println("Bidder ID not recorded");
+    	    		}
+    	    	 status = sales[index].recordBid(bid,bidderID);
     	     if(status) {
     	    	    System.out.println("\nBid recorded successfully for item number "+id+".");
          	System.out.println();
@@ -260,14 +260,15 @@ public class OnlineSaleSystem
       System.out.println();
       index = findItem(id);
       if(index >= 0) {
-    	     int bid = 0;
-    	     bid = sales[index].closeSale();
-    	     if(bid >= 0) {
+    	     int closed = 0;
+    	     closed = sales[index].closeSale();
+    	     if(closed >= 0) {
     	    	    System.out.println("\nSale closed - final sale price: $"+
-    	    	    		bid+" item number "+id);
+    	    	    		closed+" item number "+id);
         	    System.out.println();
     	     } else {
-    	    	    System.out.println("Error - sale was already closed for item number "+id+"!");
+    	    	    System.out.println("Error - sale was already closed for item number "+id
+    	    	    		+"! Final sale price $"+sales[index].getHighestBid()+".");
     	     }
     	     
       } else {
@@ -283,6 +284,24 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 4 Requirement A) here
+      String itemNumber, itemDescription, itemCondition, sellerID;
+      int buyItNowPrice;
+      // get item details
+      System.out.println("Enter new item number:");
+      itemNumber = sc.nextLine();
+      System.out.println("Enter description for item:");
+      itemDescription = sc.nextLine();
+      System.out.println("Enter condition for item:");
+      itemCondition = sc.nextLine();
+      System.out.println("Enter seller name:");
+      sellerID = sc.nextLine();
+      System.out.println("Enter Buy It Now Price:");
+      buyItNowPrice = sc.nextInt();
+     
+      //store item details in sales object array
+      sales[saleCount] = new BuyItNowSale(itemNumber, itemDescription, itemCondition, sellerID, buyItNowPrice);
+      System.out.println("New sale added for item '"+ sales[saleCount].getItemDescription() + "'!");
+      saleCount++;
    }
    
    // implementation of update accept nearest offer status feature
@@ -292,6 +311,27 @@ public class OnlineSaleSystem
       System.out.println();
       
       // implement your code for Stage 4 Requirement B) here
+      String id;
+      int index;
+      boolean acceptNearestOfferStatus = false;
+      System.out.print("Enter item number to update accept nearest offer status: ");
+      id = sc.nextLine();
+      System.out.println();
+      index = findItem(id);
+      if(index >= 0 && BuyItNowSale.class.isInstance(sales[index])) {
+    	     acceptNearestOfferStatus = ((BuyItNowSale)sales[index]).acceptNearestOffer();
+    	     if(acceptNearestOfferStatus) {
+    	    	    System.out.println("Accepting nearest offer of $"+sales[index].getHighestBid());
+    	     } else {
+    	    	    System.out.println("Accpeting nearest offer for Item "+sales[index].getItemNumber()+
+    	    	    		" has already been updated.");
+    	     }
+      } else if(index >= 0 && !BuyItNowSale.class.isInstance(sales[index])){
+    	     System.out.println("\nError - item number " +id
+    	    		 + " cannot be set to accept the nearest offer!");
+      } else {
+    	     System.out.println("\nError - item number " +id+ " not found!");
+      }
    }
    
    // find item helper method
@@ -302,11 +342,9 @@ public class OnlineSaleSystem
 		  if(sales[i].getItemNumber().equals(itemNum)) {
 			  index = i;
 			  found = true;
-		  } else {
-			  index = -1;
-		  }
+		  } 
 		  i++;
-		  if(i == saleCount) {
+		  if(!found  && i == saleCount) {
 			index = -1;
 			return index;
 		  }
